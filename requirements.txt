@@ -1,0 +1,9 @@
+flask==2.0.2
+speechRecognition==3.8.1
+googletrans==4.0.0-rc.1
+gtts==2.2.3
+playsound
+librosa==0.8.1
+soundfile
+torch==1.10.0
+numpy==1.20.3
