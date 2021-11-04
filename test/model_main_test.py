@@ -93,6 +93,29 @@ def spoofdetect(filepath,modelpath):
     dataset = ASVDataset(filepath)
     return evaluate(dataset,model,device)[0]
 
+def spoofdetect_stack(filepath,model1_path,model2_path):
+    setseed()
+    model_cls = ResNet_18
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    model1 = model_cls().to(device)
+    model2 = model_cls().to(device)
+    model1.load_state_dict(torch.load(model1_path, map_location=torch.device('cpu')))
+    model2.load_state_dict(torch.load(model2_path, map_location=torch.device('cpu')))
+    dataset = ASVDataset(filepath)
+    temp = evaluate(dataset,model1,device)[0]
+    result = [0,0]
+    if temp[0]>temp[1]:
+        result[0] = temp[0]
+    else:
+        temp = evaluate(dataset,model2,device)[0]
+        if temp[0]>temp[1]:
+            result[0] = max(temp[0],result[0])
+        else:
+            result[1]=temp[1]
+    return result
+
+
+
 
 
 

@@ -5,5 +5,5 @@ gtts==2.2.3
 playsound
 librosa==0.8.1
 soundfile
-torch==1.10.0
+torch==1.10.0+cpu
 numpy==1.20.3
